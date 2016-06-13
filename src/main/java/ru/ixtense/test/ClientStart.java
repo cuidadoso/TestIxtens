@@ -36,21 +36,12 @@ public class ClientStart
         }
         try
         {
-            Thread.sleep(10000);
+            Thread.sleep(20000);
         } catch(InterruptedException e)
         {
             LOG.info("Thread is interrupted. {}", e.getMessage());
         }
         service.shutdown();
         LocalService.exit();
-        /*
-            client.remoteCall("LocalService", "isAcepted", new Object[]{});
-            client.remoteCall("LocalService", "getMessageFromServer", new Object[]{});
-            client.remoteCall("LocalService", "getMessageFromServer", new Object[]{"Hello"});
-            client.remoteCall("LocalService", "sleep", new Object[]{2000L});
-            client.remoteCall("LocalService", "getMessageFromServer", new Object[]{"Hello", "Buy"});
-            client.remoteCall("LocalService", "getMessageFromServer2", new Object[]{});
-            client.remoteCall("LocalService2", "getMessageFromServer2", new Object[]{});
-        */
     }
 }
