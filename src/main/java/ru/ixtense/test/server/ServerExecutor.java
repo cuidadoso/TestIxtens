@@ -88,10 +88,10 @@ class ServerExecutor implements Runnable
                                                 response = new Response(command.getId(), result);
                                             } catch(IllegalAccessException e)
                                             {
-                                                LOG.info("Can'' invoke method {}. {}", method.getName(), e.getMessage());
+                                                LOG.info("Can't invoke method {}. {}", method.getName(), e.getMessage());
                                             } catch(InvocationTargetException e)
                                             {
-                                                LOG.info("Can'' invoke method {}. {}", method.getName(), e.getMessage());
+                                                LOG.info("Can't invoke method {}. {}", method.getName(), e.getMessage());
                                             }
                                             assert response != null;
                                             LOG.info("Sent response {}", response.toString());

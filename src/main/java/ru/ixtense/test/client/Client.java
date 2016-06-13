@@ -37,7 +37,7 @@ public class Client
         }
     }
 
-    private Object sendCommand(final Command command)
+    private Object sendCommand(final Command command) throws NoResponseException
     {
         Object obj = null;
 
@@ -49,16 +49,10 @@ public class Client
             LOG.info("Can't sent command to server. {}", e.getMessage());
         }
         LOG.info("Command {} has sent.", command == null ? null : command.toString());
+
         try
         {
-            if((obj = streamFromServer.readObject()) != null)
-            {
-                Response response = (Response) obj;
-                LOG.info("Response {} received.", response.toString());
-            } else
-            {
-                throw new NoResponseException("Response has no received.");
-            }
+            obj = streamFromServer.readObject();
         } catch(IOException e)
         {
             LOG.info("Can't receive response from server. {}", e.getMessage());
@@ -66,11 +60,18 @@ public class Client
         {
             LOG.info("Can't receive response from server. {}", e.getMessage());
         }
-
+        if(obj != null)
+        {
+            Response response = (Response) obj;
+            LOG.info("Response {} received.", response.toString());
+        } else
+        {
+            throw new NoResponseException("Response has no received.");
+        }
         return obj;
     }
 
-    public Object remoteCall(final String serviceName, final String methodName, final Object[] params)
+    public Object remoteCall(final String serviceName, final String methodName, final Object[] params) throws NoResponseException
     {
         Command command = new Command(++id, serviceName, methodName, params);
         return sendCommand(command);

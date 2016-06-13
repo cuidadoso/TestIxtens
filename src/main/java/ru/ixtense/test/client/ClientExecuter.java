@@ -3,6 +3,7 @@ package ru.ixtense.test.client;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.ixtense.test.util.NoResponseException;
 
 /**
  * @author Alexander Pyreev
@@ -21,9 +22,19 @@ public class ClientExecuter implements Runnable
 
     public void run()
     {
-        client.remoteCall("LocalService", "sleep", new Object[]{2000L});
-        client.remoteCall("LocalService", "getMessageFromServer", new Object[]{"Hello"});
-        client.remoteCall("LocalService", "getMessageFromServer", new Object[]{"Hello", "Buy"});
+        try
+        {
+            client.remoteCall("LocalService", "sleep", new Object[]{2000L});
+            client.remoteCall("LocalService", "getMessageFromServer", new Object[]{"Hello"});
+            client.remoteCall("LocalService", "isAcepted", new Object[]{});
+            client.remoteCall("LocalService", "getMessageFromServer", new Object[]{"Hello", "Buy"});
+            client.remoteCall("LocalService", "getCurrentDate", new Object[]{});
+        }
+        catch(NoResponseException e)
+        {
+            LOG.info(e.getMessage());
+        }
+
         client.closeResources();
     }
 }

@@ -3,6 +3,9 @@ package ru.ixtense.test.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
+
 /**
  * @author Alexander Pyreev
  */
@@ -42,4 +45,10 @@ public class LocalService
             LOG.info(e.getMessage());
         }
     }
+
+    public static Date getCurrentDate()
+    {
+        return new Date();
+    }
+
 }

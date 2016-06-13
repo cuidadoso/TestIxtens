@@ -29,7 +29,7 @@ public class ClientStart
         Client client;
 
         ExecutorService service = Executors.newFixedThreadPool(5);
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 10; i++)
         {
             client = new Client(host, port);
             service.submit(new Thread(new ClientExecuter(client)));

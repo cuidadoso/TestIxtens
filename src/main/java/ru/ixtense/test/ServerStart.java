@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 import ru.ixtense.test.server.Server;
 import ru.ixtense.test.services.LocalService;
 
-import java.io.IOException;
-
 /**
  * @author Alexander Pyreev
  */
@@ -28,7 +26,7 @@ public class ServerStart
         {
             Server server = new Server(port);
             new Thread(server).start();
-            Thread.sleep(10000);
+            Thread.sleep(20000);
             server.stop();
         } catch(InterruptedException e)
         {
